@@ -2,8 +2,13 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
     connect() { 
-        fetch('https://picsum.photos/200/300')
-            .then(res => console.log(res)) 
+        // const background = document.querySelector(".navbar")
+        // fetch('https://picsum.photos/2000/1000')
+        //     .then(res => res.url) 
+        //     .then(data => {
+        //         background.style.background-image = `url(${data})`
+        //         console.log(data)
+        //     })
     }
 
 }
