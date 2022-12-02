@@ -2,24 +2,35 @@
   <div class="notice", style="color: red"><%= flash[:error] %></div>
 <% end %>
 
-<h1>Articles</h1>
+<center><h1>Articles</h1></center>
 
-<%= render "form/article/allarticle" %>  <!-- A modifier -->
-
-<%= link_to "New article", new_article_path %>
-
-<!-- Cette partie du code affiche un filtre si on veut par exemple n'afficher que les consoles ou que les jeux ps1 etc ...
-
-      <div class="col-md-6">
-        <div class="h-100 p-5 bg-light border rounded-3">
         <%= form_with url: "/articles", method: :get do |form| %>
+        <div class="row mb-3 text-center">
           <% @tab.each do |cat| %>
-            <%= form.label cat %> <br />
-            <%= form.check_box :tags, { multiple: true }, cat, nil %> <br />
+          <div class="col-4 themed-grid-col">
+            <%= form.check_box :tags, { multiple: true }, cat, nil %>
+            <%= form.label cat %><br />
+          </div>
           <% end %>
-
             <%= form.submit %>
-        <% end %>
+        <% end %>   
         </div>
-      </div>
--->
+
+
+<div class="album py-4 bg-light">
+  <div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    <% @articles.each do |article| %>
+      <% if article.buyer != nil %> <!-- On affiche pas l'article si il a été acheté-->
+      <% elsif params.include?(:tags) == false %> <!-- Article pas acheté et aucun filtre n'a été sélectionné -->
+        <%= render partial: "form/article/allarticle", locals: {article: article} %> 
+      <% elsif params[:tags].include?(article.category.kind) || params[:tags].include?(article.console.typeconsole) %> <!-- Pas d'acheteur mais y'a un filtre -->
+        <%= render partial: "form/article/allarticle", locals: {article: article} %> 
+      <% end %>
+    <% end %>
+  </div>
+  </div>
+</div>
+
+      

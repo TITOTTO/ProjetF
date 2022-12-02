@@ -1,4 +1,18 @@
-<%= @user.email %>
-<%= @user.first_name %>
-<%= @user.last_name %>
-<%= @user.description %>
+      <div class="d-flex flex-column align-items-start gap-2">
+      <%= form_with url: user_path, method: :put do |form| %>
+
+            <%= form.label :first_name, "#{@user.first_name}" %><br>
+            <%= form.text_field :first_name %><br>
+
+            <%= form.label :last_name, "#{@user.last_name}" %><br>
+            <%= form.text_field :last_name %><br>
+
+            <%= form.label :description, "#{@user.description}" %><br>
+            <%= form.text_area :description %><br>
+
+            <%= form.label :email, "#{@user.email}" %><br>
+            <%= form.email_field :email %><br>
+
+            <%= form.submit "Envoyer" %>
+        <% end %>
+      </div>

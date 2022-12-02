@@ -11,11 +11,22 @@ class CartsController < ApplicationController
 
   # POST /carts or /carts.json
   def create
-
+    @cart = Cart.new(user: current_user, article_id: params[:article_id])
+      if @cart.save
+        redirect_to "/user/#{current_user.id}/carts" 
+        flash[:notice] = "Article was successfully created."
+      else
+        @cart.errors.full_messages.each do |msg|
+        flash[:error] = msg
+        end
+        redirect_to root_path
+      end
   end
 
   def destroy
-
+    @cart = Cart.find(params[:cart_id])
+    @cart.destroy
+    redirect_to user_carts_path(current_user)
   end
 
   def checklog

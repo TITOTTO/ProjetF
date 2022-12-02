@@ -1,1 +1,20 @@
-<%= render "form/user/show" %> <!-- A modifier -->
+ <div class="container px-4 py-5">
+    <h2 class="pb-2 border-bottom">Votre profil</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+        <%if @user.avatar.attached?%>
+            <%= image_tag @user.avatar, alt: 'avatar' %>
+            <%= form_tag user_avatars_path(@user), multipart: true do %> 
+            <%= file_field_tag :avatar %> 
+            <%= submit_tag "Modifier l'image" %> 
+            <% end %> 
+            <%= link_to "Supprimer l'image", user_avatar_path(@user, @user.avatar.id), method: :delete, class: "btn btn-danger", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> 
+        <%else%>
+            <%= form_tag user_avatars_path(@user), multipart: true do %> 
+            <%= file_field_tag :avatar %> 
+            <%= submit_tag "Ajouter une image" %> 
+            <% end %> 
+        <%end%>
+        <%= render "form/user/show" %> 
+    </div>
+</div>

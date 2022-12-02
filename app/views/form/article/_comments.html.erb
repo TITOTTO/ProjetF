@@ -1,4 +1,5 @@
 <% @comments.each do |comment| %>
-<%= comment.title %>
-<%= comment.content %>
+<div class="col-4 themed-grid-col"><center><%= comment.title %></center></div>
+<div class="col-4 themed-grid-col"><%= comment.content %></div>
+<br>
 <% end %>

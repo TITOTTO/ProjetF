@@ -1,0 +1,6 @@
+<%= form_with url: "/user/#{current_user.id}/carts", method: :post do |form| %>
+
+  <%= hidden_field_tag :article_id, params[:article] %>
+
+  <%= form.submit "Ajouter au caddie"%>
+<% end %>

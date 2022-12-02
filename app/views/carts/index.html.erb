@@ -1,1 +1,27 @@
-<%= render "form/cart/index" %>  <!-- A modifier -->
+
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Vos articles </h6>
+    <%= render "form/cart/index" %> 
+    
+    <small class="d-block text-end mt-3">
+      Total : <%= @total %> Euros
+    </small>
+    <small class="d-block text-end mt-3">
+    <%= form_tag orders_path do %>
+    <article>
+      <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <p><%= flash[:error] %></p>
+        </div>
+      <% end %>
+    </article><script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%=Rails.configuration.stripe[:publishable_key]%>"
+        data-description="Achat d'un produit"
+        data-amount="<%= @total * 100 %>"
+        data-label="Valider le paiement"
+        data-locale="eur">
+    </script>
+    <% end %>
+    </small>
+    
+  </div>

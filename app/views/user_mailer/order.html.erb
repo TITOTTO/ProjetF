@@ -1,0 +1,16 @@
+<!DOCTYPE html> 
+    <html> 
+      <head> 
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' /> 
+      </head> 
+      <body> 
+        <h1>Merci pour votre commande !</h1> 
+        <p> 
+          Vous allez recevoir votre/vos produit(s) : <% @article.each do |article| %><%= article.title %><br><% end %>. 
+        </p> 
+        <p> 
+          Encore merci <%= @user.first_name %>
+        </p> 
+        <p> À très vite ! 
+      </body> 
+    </html> 

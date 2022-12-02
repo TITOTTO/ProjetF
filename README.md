@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+OldSchoolGaming
 
-Things you may want to cover:
+First website after my formation without developped front-end
 
-* Ruby version
+Overview :
+Simple Online sales site
 
-* System dependencies
+Ruby Version : 3.0.0
+Make a Bundle install
+rails db:seed (Help you out having a small database)
 
-* Configuration
+Stripe is in test mode, don't worry for your money ! :)
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You have an admin panel, making you delete account (Has to be done in rails console : User.admin :true)

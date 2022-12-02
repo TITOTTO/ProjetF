@@ -1,8 +1,24 @@
-<% @user.carts.each do |cart| %>  <!-- On liste tous les articles de l'utilisateur connecté -->
-<%= cart.article.title %>
-<%= cart.article.content %>
-<%= cart.article.price %>
-<%= cart.article.seller.first_name %>  <!-- Si jamais celui qui fait cette page veut le nom du type qui vend le produit -->
-<% end %>
+<% @user.carts.each do |cart| %>
+    <div class="d-flex text-muted pt-3">
+    <%= image_tag "#{cart.article.image}", width:"32", height:"32" %>
+      
+      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+        <div class="d-flex justify-content-between">
+          <strong class="text-gray-dark"><%= cart.article.title %></strong>
+          <%= cart.article.price %> Euros
+        </div>
+        <div class="d-flex justify-content-between">
+          <span class="d-block"><%= cart.article.content %></span>
+          <%= cart.article.category.kind %> <%= cart.article.console.typeconsole %>
+        </div>
+        <div class="d-flex justify-content-between">
+          <%= link_to "#{cart.article.seller.email}", user_path(cart.article.seller) %>
+          <%= form_with url: "/user/#{current_user.id}/carts/#{cart.id}", method: :delete do |form| %>
+            <%= hidden_field_tag :cart_id, cart.id %>
+            <%= form.submit "Supprimer" %>
+          <% end %> 
+        </div>
+      </div>
+    </div>
 
-<%= @total %> <!-- Variable du total du prix de tous les articles -->
+<% end %>

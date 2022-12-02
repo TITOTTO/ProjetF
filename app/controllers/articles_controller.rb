@@ -4,10 +4,14 @@ class ArticlesController < ApplicationController
   # GET /articles or /articles.json
   def index
     @articles = Article.all
-    @category = Category.all  # Jusqu'à la ligne 11, ça sert juste pour les filtres sur la page index
+    @category = Category.all
+    @console = Console.all
     @tab = []
     @category.each do |cat|
       @tab << cat.kind
+    end
+    @console.each do |cons|
+      @tab << cons.typeconsole
     end
   end
 
@@ -58,6 +62,8 @@ class ArticlesController < ApplicationController
 
   # DELETE /articles/1 or /articles/1.json
   def destroy
+    @article.comments.destroy_all
+    @article.carts.destroy_all
     @article.destroy
 
     respond_to do |format|
